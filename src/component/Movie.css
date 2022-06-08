@@ -1,0 +1,21 @@
+.movieContainer{
+    display: block;
+    width: 500px;
+    height: 800px;
+    margin: 10px;
+    border-color: black;
+    border-style: double;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+img{
+    max-width: 70%;
+    max-height: 60%;
+}
+
+iframe{
+    max-width: 70%;
+    max-height: 60%;
+}

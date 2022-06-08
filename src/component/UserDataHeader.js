@@ -8,9 +8,7 @@ class UserDataHeader extends Component {
 
         return (
             <div>
-                <p>user name: {user.name}</p>
-                <p>user ID: {user.id}</p>
-                <p>user budget: {user.budget}</p>
+                <h3>{user.name} ({user.budget} Bitcoins)</h3>
             </div>
         )
 

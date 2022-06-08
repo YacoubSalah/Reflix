@@ -14,7 +14,7 @@ class MovieWidget extends Component {
     }
 
     handleButton = () => {
-        this.props.buttonClickMethod(this.props.movie.name)
+        this.props.buttonClickMethod(this.props.movie.id)
     }
 
     render() {

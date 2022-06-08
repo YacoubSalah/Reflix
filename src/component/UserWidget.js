@@ -14,8 +14,7 @@ class UserWidget extends Component {
         return (
             <div onClick={this.updateActiveUser}>
                 <Link to="/Catalog/">
-                    <h3>name: {user.name}</h3>
-                    <img src="" alt={user.avatar} />
+                    <h3>{user.name}</h3>
                 </Link>
             </div>
         )

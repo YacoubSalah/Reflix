@@ -8,23 +8,24 @@ class Catalog extends Component {
     constructor() {
         super()
         this.state = {
-            inputValue: "",
+            searchString: ""
         }
     }
 
     bindInputValue = (event) => {
-        let newSearchFieldValue = event.target.value
-        this.setState({ searchFieldValue: newSearchFieldValue })
+        let newSearchString = event.target.value
+        this.setState({ searchString: newSearchString })
     }
 
-    getMovies = (filter) => {
+    getMovies = (moviesGroup) => {
 
         let allMovies = this.props.movies
         let rentedMovies = []
         let availableMovies = []
+        let searchRegex = new RegExp(this.state.searchString , 'i')
 
         allMovies.forEach(movie => {
-            if (this.isMovieSearched(movie)) {
+            if (searchRegex.test(movie.name)) {
                 if (this.isMovieRented(movie)) {
                     rentedMovies.push(movie)
                 } else {
@@ -32,28 +33,24 @@ class Catalog extends Component {
                 }
             }
         })
-
-        if (filter === "rented") {
+        
+        if (moviesGroup === "rented") {
             return rentedMovies
-        } else if (filter === "available") {
+        } else if (moviesGroup === "available") {
             return availableMovies
         }
 
     }
 
-    isMovieRented = (movie) => {
+    isMovieRented = (movie,) => {
         let isRented = false
         let user = this.props.users.find(user => user.name === this.props.activeUserName)
         user.movies.forEach(id => {
-            if (movie["id"] === id){
+            if (movie["id"] === id) {
                 isRented = true
             }
         })
         return isRented
-    }
-
-    isMovieSearched = (movie) => {
-        return true
     }
 
     render() {
@@ -65,8 +62,8 @@ class Catalog extends Component {
         return (
             <div >
                 <UserDataHeader user={users.find(u => u.name === activeUserName)} />
-                <input type="text" name="searchBar" val={this.state.inputValue} onChange={this.bindInputValue} />
-                <Movies section="Rented Movies" movies={this.getMovies("rented")} removeMovie={this.props.removeMovie}  />
+                <input type="text" name="searchBar" val={this.state.searchString} onChange={this.bindInputValue} />
+                <Movies section="Rented Movies" movies={this.getMovies("rented")} removeMovie={this.props.removeMovie} />
                 <br></br>
                 <Movies section="Available Movies" movies={this.getMovies("available")} addMovie={this.props.addMovie} />
             </div>
